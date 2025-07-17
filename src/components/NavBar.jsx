@@ -1,9 +1,12 @@
-import { Route, Routes, NavLink, useNavigate } from "react-router-dom";
+import { Route, Routes, NavLink, useNavigate, Outlet } from "react-router-dom";
 import styled from "styled-components";
+import { AuthStatus } from "./AuthStatus";
 
 const NavBarContainer = ({className}) => {
 const navigate = useNavigate();
-   return (<div className={className}>
+   return (<>
+   <div className={className}>
+    <AuthStatus/>
 		<ul>
         <li>
           <NavLink style={({isActive}) => isActive ? {color: '#47c36a'}: {color: '#e1e7e1'}} to="/categories/characters">Герои</NavLink>
@@ -19,7 +22,9 @@ const navigate = useNavigate();
 	  <button onClick={()=>navigate(-1)}>Вернуться назад</button>
 	  <button onClick={()=>navigate('/')}>Главная </button>
       </div>
-	</div>)
+	</div>
+  <Outlet />
+  </>)
 }
 
 export const NavBar = styled(NavBarContainer)`

@@ -1,24 +1,27 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Home, Categories, CategoriesDetail, Error } from "./pages";
-import { NavBar } from "./components";
+import { Home, Categories, CategoriesDetail, Error, Login } from "./pages";
+import { NavBar, PrivateRoute } from "./components";
+import { AuthProvaider } from "./context";
 
 
 function App() {
-
-	
-  return (
+   return (
     <>
-      <NavBar/>
+    <AuthProvaider>
+      
       <Routes>
+        <Route element={<NavBar />}>
         <Route path="/" element={<Home />} />
-        <Route path="/categories/:categorie" element={<Categories />} />
+        <Route path="/categories/:categorie" element={<PrivateRoute><Categories /></PrivateRoute>} />
         <Route
           path="/categories/:categorie/:id"
-          element={<CategoriesDetail />}
+          element={<PrivateRoute><CategoriesDetail /></PrivateRoute>}
         />
+        </Route>
+        <Route path="/login" element={<Login />} />
         <Route path="/*" element={<Error/>} />
-      </Routes>
+      </Routes></AuthProvaider>
     </>
   );
 }

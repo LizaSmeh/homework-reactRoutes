@@ -6,7 +6,7 @@ import { Location, Series, Character } from "../components";
 
 export const Categories = () => {
   const params = useParams();
-  
+ 
   return (
     <>
       {params.categorie === "characters"
