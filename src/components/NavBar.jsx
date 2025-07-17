@@ -1,6 +1,7 @@
-import { Route, Routes, NavLink, useNavigate, Outlet } from "react-router-dom";
+import { NavLink, useNavigate, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { AuthStatus } from "./AuthStatus";
+import { Suspense } from "react";
 
 const NavBarContainer = ({className}) => {
 const navigate = useNavigate();
@@ -23,7 +24,9 @@ const navigate = useNavigate();
 	  <button onClick={()=>navigate('/')}>Главная </button>
       </div>
 	</div>
-  <Outlet />
+  <Suspense fallback={<div>Загрузка...</div>}> 
+    <Outlet />
+   </Suspense> 
   </>)
 }
 
