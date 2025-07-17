@@ -1,22 +1,38 @@
 import { Location, Series, Character } from "../components";
-import characters from "../data/characters.json" assert { type: "json" };
-import location from "../data/location.json" assert { type: "json" };
-import series from "../data/episode.json" assert { type: "json" };
 import { useParams } from "react-router-dom";
-
+import axios from 'axios';
+import { useEffect, useState } from 'react'
 
 export const CategoriesDetail = () => {
-  const params = useParams();
-  const id = Number(params.id-1)
- 
+ const {categorie, id} = useParams();
+ const [data, setData] = useState([])
+ const newId =Number(id - 1);
+
+ useEffect(() => {
+    detailData(categorie)
+  }, [categorie])
+
+  const detailData = async (categorie) => {
+    
+    try {
+      const { data } = await axios.get(`https://rickandmortyapi.com/api/${categorie}`)
+
+      setData(data.results)
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  
  const render = () => {
-    switch (params.categorie) {
-      case 'characters':
-        return <Character name={characters[id].name} status={characters[id].status} species={characters[id].species} type={characters[id].type} gender={characters[id].gender} image={characters[id].image} created={characters[id].created} />
-      case 'locations':
-        return <Location name={location[id].name} type={location[id].type} created={location[id].created} dimension={location[id].dimension}/>
-      case 'episodes':
-        return <Series name={series[id].name} air_date={series[id].air_date} episode={series[id].air_date} created={series[id].created}  />
+    switch (categorie) {
+      case 'character':
+        return <Character name={data[newId].name} status={data[newId].status} species={data[newId].species} type={data[newId].type} gender={data[newId].gender} image={data[newId].image} created={data[newId].created} />
+      case 'location':
+        return <Location name={data[newId].name} type={data[newId].type} created={data[newId].created} dimension={data[newId].dimension}/>
+      case 'episode':
+        return <Series name={data[newId].name} air_date={data[newId].air_date} episode={data[newId].air_date} created={data[newId].created}  />
       default:
         return null
     } 

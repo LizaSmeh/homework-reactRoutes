@@ -10,13 +10,13 @@ const navigate = useNavigate();
     <AuthStatus/>
 		<ul>
         <li>
-          <NavLink style={({isActive}) => isActive ? {color: '#47c36a'}: {color: '#e1e7e1'}} to="/categories/characters">Герои</NavLink>
+          <NavLink style={({isActive}) => isActive ? {color: '#47c36a'}: {color: '#e1e7e1'}} to="/categories/character">Герои</NavLink>
         </li>
         <li>
-          <NavLink style={({isActive}) => isActive ? {color: '#47c36a'}: {color: '#e1e7e1'}} to="/categories/locations">Локации</NavLink>
+          <NavLink style={({isActive}) => isActive ? {color: '#47c36a'}: {color: '#e1e7e1'}} to="/categories/location">Локации</NavLink>
         </li>
         <li>
-          <NavLink style={({isActive}) => isActive ? {color: '#47c36a'}: {color: '#e1e7e1'}} to="/categories/episodes">Эпизоды</NavLink>
+          <NavLink style={({isActive}) => isActive ? {color: '#47c36a'}: {color: '#e1e7e1'}} to="/categories/episode">Эпизоды</NavLink>
         </li>
       </ul>
       <div className="btn">

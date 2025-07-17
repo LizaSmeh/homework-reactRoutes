@@ -1,15 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-
+import ErrorBoundary from "./ErrorBoundary.jsx";
 import { NavBar, PrivateRoute } from "./components";
 import { AuthProvaider } from "./context";
 import { lazy } from "react";
 
-const Home = lazy(() => import('./pages/Home.jsx'));
-const Categories = lazy(() => import('./pages/Сategories.jsx'));
-const CategoriesDetail  = lazy(() => import('./pages/СategoriesDetail.jsx'));
-const Login  = lazy(() => import('./pages/Login.jsx'));
-const Error  = lazy(() => import('./pages/Error.jsx'));
+const Home = lazy(() => import('./pages/Home.jsx').then(module=>({default: module.Home})));
+const Categories = lazy(() => import('./pages/Сategories.jsx').then(module=>({default: module.Categories})));
+const CategoriesDetail  = lazy(() => import('./pages/СategoriesDetail.jsx').then(module=>({default: module.CategoriesDetail})));
+const Login  = lazy(() => import('./pages/Login.jsx').then(module=>({default: module.Login})));
+const Error  = lazy(() => import('./pages/Error.jsx').then(module=>({default: module.Error})));
 
 function App() {
   return (
@@ -35,10 +35,13 @@ function App() {
               }
             />
           </Route>
+          
           <Route path="/login" element={<Login />} />
           <Route path="/*" element={<Error />} />
+          
         </Routes>
       </AuthProvaider>
+      
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 export const Error = () => {
-    return <p>NotFound page</p>
+    return <Suspense fallback={<div>Загрузка...</div>}><p>NotFound page</p></Suspense>
 }
